@@ -21,15 +21,30 @@ Install the package via composer:
 	composer require "m3rten/laravel-double-opt-in"
 ```
 
+Add the Service Provider to **config/app.php**
+```php
+    'providers' => [
+        /* ... */
+        M3rten\DoubleOptIn\DoubleOptInServiceProvider::class,
+    ],
+```
+
+Replace the used traits in **app/Http/Controllers/Auth/AuthController.php** with:
+```php
+    use AuthenticatesUsers, RegisterAndActivateUsers, ThrottlesLogins {
+        RegisterAndActivateUsers::getCredentials insteadof AuthenticatesUsers;
+    }
+```
+
 Publish the packages assets and run the migration.
 ```
     php artisan vendor:publish
 	php artisan migrate
 ```
-If you'd like to alter the provided blade templates you may edit the files in /resources/views/vendor/doubleoptin 
-If you'd like to alter the provided language files you may edit the files in /resources/lang/vendor/doubleoptin 
+If you'd like to alter the provided blade templates you may edit the files in **/resources/views/vendor/doubleoptin**. 
+If you'd like to alter the provided language files you may edit the files in **/resources/lang/vendor/doubleoptin**. 
 
-Add the activation an verification routes to your app/Http/routes.php
+Add the activation an verification routes to your **app/Http/routes.php**
 ```php
     Route::get('/verify/{token}', ['as' => 'activation.verify','uses' => 'Auth\AuthController@verify',]);
     Route::get('/activate', ['as' => 'activation.edit','uses' => 'Auth\AuthController@editActivation',]);
