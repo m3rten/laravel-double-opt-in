@@ -1,0 +1,13 @@
+{
+    "name": "m3rten/laravel-double-opt-in",
+    "description": "Double-opt-in registration for Laravel 5.1.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Merten",
+            "email": "sebastian@mertenonline.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
